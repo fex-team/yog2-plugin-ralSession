@@ -1,5 +1,5 @@
 {
-  "name": "ral-session",
+  "name": "ralSession",
   "version": "1.0.0",
   "main": "plugins/index.js",
   "scripts": {

@@ -1,7 +1,14 @@
+/**
+ * @file Ral Session
+ * @author hefangshi@baidu.com
+ * http://fis.baidu.com/
+ * 2016/8/18
+ */
+
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 
-module.exports['ralSession'] = ['ral', function(app, conf){
+module.exports.ralSession. = ['ral', function(app, conf){
     conf.redisOption.client = new RedisClient(conf.redisOption);
     conf.store = new RedisStore(conf.redisOption);
     return function(){
@@ -9,7 +16,7 @@ module.exports['ralSession'] = ['ral', function(app, conf){
     };
 }];
 
-module.exports['ralSession'].defaultConf = {
+module.exports.ralSession.defaultConf = {
     redisOption: {
         ralID: 'SESSION',
         prefix: 'yog2_session_'
@@ -62,7 +69,6 @@ RedisClient.prototype.expire = function(key, value, cb) {
         cb(null, data);
     }).catch(cb);
 };
-
 
 RedisClient.prototype.on = function() {
 };
