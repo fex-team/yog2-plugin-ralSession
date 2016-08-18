@@ -15,4 +15,4 @@ module.exports.ralSession = {
     resave: false,
     saveUninitialized: true,
     name: 'ysid'
-}
+};

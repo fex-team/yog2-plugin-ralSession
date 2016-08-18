@@ -5,13 +5,15 @@
  * 2016/8/18
  */
 
+/* global yog */
+
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 
-module.exports.ralSession. = ['ral', function(app, conf){
+module.exports.ralSession = ['ral', function (app, conf) {
     conf.redisOption.client = new RedisClient(conf.redisOption);
     conf.store = new RedisStore(conf.redisOption);
-    return function(){
+    return function () {
         app.use(session(conf));
     };
 }];
@@ -25,13 +27,13 @@ module.exports.ralSession.defaultConf = {
     resave: false,
     saveUninitialized: true,
     name: 'ysid'
-}
+};
 
-function RedisClient (options) {
+function RedisClient(options) {
     this.ralID = options.ralID;
 }
 
-RedisClient.prototype.get = function(key, cb) {
+RedisClient.prototype.get = function (key, cb) {
     yog.ralP(this.ralID, {
         method: 'get',
         data: key
@@ -40,7 +42,7 @@ RedisClient.prototype.get = function(key, cb) {
     }).catch(cb);
 };
 
-RedisClient.prototype.set = function(args, cb) {
+RedisClient.prototype.set = function (args, cb) {
     yog.ralP(this.ralID, {
         method: 'set',
         data: args
@@ -49,7 +51,7 @@ RedisClient.prototype.set = function(args, cb) {
     }).catch(cb);
 };
 
-RedisClient.prototype.del = function(key, cb) {
+RedisClient.prototype.del = function (key, cb) {
     yog.ralP(this.ralID, {
         method: 'del',
         data: key
@@ -58,7 +60,7 @@ RedisClient.prototype.del = function(key, cb) {
     }).catch(cb);
 };
 
-RedisClient.prototype.expire = function(key, value, cb) {
+RedisClient.prototype.expire = function (key, value, cb) {
     yog.ralP(this.ralID, {
         method: 'expire',
         data: {
@@ -70,5 +72,4 @@ RedisClient.prototype.expire = function(key, value, cb) {
     }).catch(cb);
 };
 
-RedisClient.prototype.on = function() {
-};
+RedisClient.prototype.on = function () {};
