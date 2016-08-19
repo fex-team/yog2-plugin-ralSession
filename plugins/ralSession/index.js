@@ -9,6 +9,7 @@
 
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
+var noop = function(){};
 
 module.exports.ralSession = ['ral', function (app, conf) {
     conf.redisOption.client = new RedisClient(conf.redisOption);
@@ -52,6 +53,9 @@ RedisClient.prototype.set = function (args, cb) {
 };
 
 RedisClient.prototype.del = function (key, cb) {
+    if (!cb) {
+        cb = noop;
+    }
     yog.ralP(this.ralID, {
         method: 'del',
         data: key
