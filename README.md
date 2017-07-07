@@ -69,9 +69,8 @@ export default router => {
 
 ```javascript
 export default router => {
-  let conf = yog.conf.ralSession;
-  // 修改前缀
-  conf.redisOption.prefix = 'MIS_SESSION_';
+  // 修改前缀, 通过 Object Spread 防止对全局 conf 产生影响
+  let conf = {...yog.conf.ralSession, redisOption: {...yog.conf.ralSession.redisOption, prefix: 'MIS_SESSION_'}};
   // 启用 session
   yog.pluginFactories.ralSession(router)(conf);
 }
